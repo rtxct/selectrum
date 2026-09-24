@@ -5,10 +5,11 @@ build/
 # IntelliJ Platform Plugin
 .intellijPlatform/
 
-# IDE
+# IDE / Editor
 .idea/
 *.iml
 out/
+bin/
 
 # OS
 .DS_Store

@@ -3,8 +3,7 @@
     <name>Selectrum</name>
     <vendor>selectrum</vendor>
     <description><![CDATA[
-        Time-based automatic theme switching for JetBrains IDEs.
-        Configure a JSON schedule to change your IDE theme at specific hours of the day.
+        Auto select the JetBrains IDE's color spectrum by the time of the day.
     ]]></description>
 
     <depends>com.intellij.modules.platform</depends>
