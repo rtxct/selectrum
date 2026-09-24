@@ -10,6 +10,9 @@ build/
 *.iml
 out/
 bin/
+.project
+.classpath
+.settings/
 
 # OS
 .DS_Store
