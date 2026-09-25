@@ -1,6 +1,5 @@
-package com.selectrum.service;
+package com.selectrum.application.service;
 
-import com.intellij.ide.ApplicationActivationStateManager;
 import com.intellij.openapi.Disposable;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.application.PathManager;
@@ -15,7 +14,7 @@ import com.intellij.openapi.vfs.VirtualFileManager;
 import com.intellij.openapi.vfs.newvfs.BulkFileListener;
 import com.intellij.openapi.vfs.newvfs.events.VFileEvent;
 import com.intellij.util.concurrency.AppExecutorUtil;
-import com.selectrum.model.ScheduleEntry;
+import com.selectrum.domain.model.ScheduleEntry;
 import com.selectrum.utils.NotificationUtils;
 import lombok.Getter;
 import org.jetbrains.annotations.NotNull;
@@ -44,22 +43,39 @@ public final class SelectrumConfigService implements Disposable {
     private volatile List<ScheduleEntry> schedule;
 
     public SelectrumConfigService() {
-        this.configFilePath =
-                Path.of(PathManager.getConfigPath(), CONFIG_FILE_NAME);
-        this.schedule =
-                Collections.emptyList();
+        this.configFilePath = Path.of(PathManager.getConfigPath(), CONFIG_FILE_NAME);
+        this.schedule = Collections.emptyList();
 
         ensureConfigFileExists();
         loadConfigSync();
         subscribeToFileChanges();
     }
 
-    public static SelectrumConfigService getInstance() {
+    public static SelectrumConfigService instance() {
         return ApplicationManager.getApplication().getService(SelectrumConfigService.class);
     }
 
     @Override
     public void dispose() { }
+
+    private void subscribeToFileChanges() {
+        ApplicationManager.getApplication().getMessageBus().connect(this)
+                .subscribe(VirtualFileManager.VFS_CHANGES, new BulkFileListener() {
+                    @Override
+                    public void after(@NotNull List<? extends VFileEvent> events) {
+                        for (VFileEvent event : events) {
+                            if (isConfigFileEvent(event)) {
+                                loadConfigAsync();
+                                return;
+                            }
+                        }
+                    }
+                });
+    }
+
+    private boolean isConfigFileEvent(VFileEvent event) {
+        return FileUtil.pathsEqual(event.getPath(), configFilePath.toString());
+    }
 
     private void ensureConfigFileExists() {
         if (Files.exists(configFilePath)) {
@@ -213,25 +229,6 @@ public final class SelectrumConfigService implements Disposable {
 
         throw new IllegalArgumentException(
                 "Invalid hour key: '" + key + "'. Hours must be quoted strings.");
-    }
-
-    private void subscribeToFileChanges() {
-        ApplicationManager.getApplication().getMessageBus().connect(this)
-                .subscribe(VirtualFileManager.VFS_CHANGES, new BulkFileListener() {
-                    @Override
-                    public void after(@NotNull List<? extends VFileEvent> events) {
-                        for (VFileEvent event : events) {
-                            if (isConfigFileEvent(event)) {
-                                loadConfigAsync();
-                                return;
-                            }
-                        }
-                    }
-                });
-    }
-
-    private boolean isConfigFileEvent(VFileEvent event) {
-        return FileUtil.pathsEqual(event.getPath(), configFilePath.toString());
     }
 
     private void triggerSchedulerRecheck() {

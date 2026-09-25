@@ -2,26 +2,22 @@ package com.selectrum.widget;
 
 import com.intellij.ide.DataManager;
 import com.intellij.openapi.actionSystem.*;
-import com.intellij.openapi.fileEditor.FileEditorManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.popup.JBPopupFactory;
 import com.intellij.openapi.ui.popup.ListPopup;
 import com.intellij.openapi.util.IconLoader;
-import com.intellij.openapi.vfs.LocalFileSystem;
-import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.openapi.wm.StatusBar;
 import com.intellij.openapi.wm.StatusBarWidget;
 import com.intellij.ui.awt.RelativePoint;
-import com.selectrum.service.SelectrumConfigService;
-import com.selectrum.service.SelectrumScheduler;
-import com.selectrum.settings.SelectrumSettings;
+import com.intellij.util.Consumer;
+import com.selectrum.application.service.SelectrumScheduler;
+import com.selectrum.infrastructure.settings.SelectrumSettings;
+import com.selectrum.utils.FileUtils;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
-import java.nio.file.Path;
 
 /**
  * Status bar widget that shows the Selectrum icon in the bottom-right corner.
@@ -45,6 +41,9 @@ public final class SelectrumStatusBarWidget implements StatusBarWidget, StatusBa
     }
 
     @Override
+    public void dispose() { }
+
+    @Override
     public @NotNull String ID() {
         return WIDGET_ID;
     }
@@ -66,12 +65,12 @@ public final class SelectrumStatusBarWidget implements StatusBarWidget, StatusBa
 
     @Override
     public String getTooltipText() {
-        boolean enabled = SelectrumSettings.getInstance().isEnabled();
+        boolean enabled = SelectrumSettings.instance().isEnabled();
         return "Selectrum: " + (enabled ? "Enabled" : "Disabled");
     }
 
     @Override
-    public com.intellij.util.Consumer<MouseEvent> getClickConsumer() {
+    public Consumer<MouseEvent> getClickConsumer() {
         return this::showPopup;
     }
 
@@ -80,22 +79,10 @@ public final class SelectrumStatusBarWidget implements StatusBarWidget, StatusBa
 
         addGroupToggle(group);
         group.addSeparator();
-
-        group.add(new AnAction("Open Configuration") {
-            @Override
-            public void actionPerformed(@NotNull AnActionEvent e) {
-                openConfigFile();
-            }
-        });
+        addGroupConfigOpener(group);
 
         Component component = event.getComponent();
-        ListPopup popup = JBPopupFactory.getInstance().createActionGroupPopup(
-                "Selectrum",
-                group,
-                DataManager.getInstance().getDataContext(component),
-                JBPopupFactory.ActionSelectionAid.SPEEDSEARCH,
-                false
-        );
+        ListPopup popup = getPopup(group, component);
 
         Dimension size = popup.getContent().getPreferredSize();
         Point point = new Point(0, -size.height);
@@ -103,22 +90,41 @@ public final class SelectrumStatusBarWidget implements StatusBarWidget, StatusBa
         popup.show(new RelativePoint(component, point));
     }
 
+    private @NotNull ListPopup getPopup(DefaultActionGroup group, Component component) {
+        return JBPopupFactory.getInstance().createActionGroupPopup(
+                "Selectrum",
+                group,
+                DataManager.getInstance().getDataContext(component),
+                JBPopupFactory.ActionSelectionAid.SPEEDSEARCH,
+                false
+        );
+    }
+
+    private void addGroupConfigOpener(DefaultActionGroup group) {
+        group.add(new AnAction("Open Configuration") {
+            @Override
+            public void actionPerformed(@NotNull AnActionEvent e) {
+                FileUtils.openConfigFile(project);
+            }
+        });
+    }
+
     private void addGroupToggle(DefaultActionGroup group) {
         group.add(new ToggleAction("Theme Switching") {
             @Override
             public boolean isSelected(@NotNull AnActionEvent e) {
-                return SelectrumSettings.getInstance().isEnabled();
+                return SelectrumSettings.instance().isEnabled();
             }
 
             @Override
             public void setSelected(@NotNull AnActionEvent e, boolean state) {
-                SelectrumSettings.getInstance().setEnabled(state);
+                SelectrumSettings.instance().setEnabled(state);
                 if (statusBar != null) {
                     statusBar.updateWidget(WIDGET_ID);
                 }
 
                 if (state) {
-                    SelectrumScheduler.getInstance().checkAndApplyTheme();
+                    SelectrumScheduler.instance().checkAndApplyTheme();
                 }
             }
 
@@ -128,17 +134,4 @@ public final class SelectrumStatusBarWidget implements StatusBarWidget, StatusBa
             }
         });
     }
-
-    private void openConfigFile() {
-        Path configPath = SelectrumConfigService.getInstance().getConfigFilePath();
-        VirtualFile virtualFile = LocalFileSystem.getInstance()
-                .refreshAndFindFileByPath(configPath.toString());
-
-        if (virtualFile != null) {
-            FileEditorManager.getInstance(project).openFile(virtualFile, true);
-        }
-    }
-
-    @Override
-    public void dispose() { }
 }

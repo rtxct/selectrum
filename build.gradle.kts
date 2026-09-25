@@ -1,5 +1,11 @@
 plugins {
+    // Java compilation and building.
     id("java")
+
+    // Lombok.
+    id("io.freefair.lombok") version "9.7.0"
+
+    // Intellij API.
     id("org.jetbrains.intellij.platform") version "2.5.0"
 }
 
@@ -7,17 +13,21 @@ group = "com.selectrum"
 version = "1.0.0"
 
 repositories {
+    // Use Maven Central for resolving dependencies.
     mavenCentral()
 
+    // Use Intellij Plataform for plugin development dependencies.
     intellijPlatform {
         defaultRepositories()
     }
 }
 
 dependencies {
+    // Lombok
 	compileOnly("org.projectlombok:lombok:1.18.48")
 	annotationProcessor("org.projectlombok:lombok:1.18.48")
 
+    // Intellij API.
     intellijPlatform {
         pluginVerifier()
         zipSigner()
@@ -28,6 +38,7 @@ dependencies {
 
 java {
     toolchain {
+        // Java compile/build version.
         languageVersion.set(JavaLanguageVersion.of(21))
     }
 }

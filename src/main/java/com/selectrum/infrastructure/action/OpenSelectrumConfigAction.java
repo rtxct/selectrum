@@ -1,4 +1,4 @@
-package com.selectrum.action;
+package com.selectrum.infrastructure.action;
 
 import com.intellij.openapi.actionSystem.ActionUpdateThread;
 import com.intellij.openapi.actionSystem.AnAction;
@@ -7,7 +7,8 @@ import com.intellij.openapi.fileEditor.FileEditorManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.LocalFileSystem;
 import com.intellij.openapi.vfs.VirtualFile;
-import com.selectrum.service.SelectrumConfigService;
+import com.selectrum.application.service.SelectrumConfigService;
+import com.selectrum.utils.FileUtils;
 import org.jetbrains.annotations.NotNull;
 
 import java.nio.file.Path;
@@ -27,15 +28,7 @@ public final class OpenSelectrumConfigAction extends AnAction {
             return;
         }
 
-        SelectrumConfigService configService = SelectrumConfigService.getInstance();
-        Path configPath = configService.getConfigFilePath();
-
-        VirtualFile virtualFile = LocalFileSystem
-                .getInstance().refreshAndFindFileByPath(configPath.toString());
-
-        if (virtualFile != null) {
-            FileEditorManager.getInstance(project).openFile(virtualFile, true);
-        }
+        FileUtils.openConfigFile(project);
     }
 
     @Override

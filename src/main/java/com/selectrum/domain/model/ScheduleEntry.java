@@ -1,4 +1,4 @@
-package com.selectrum.model;
+package com.selectrum.domain.model;
 
 import com.selectrum.utils.TimeUtils;
 import lombok.EqualsAndHashCode;

@@ -1,9 +1,7 @@
-package com.selectrum.service;
+package com.selectrum.application.service;
 
 import com.intellij.ide.ui.LafManager;
 import com.intellij.ide.ui.laf.UIThemeLookAndFeelInfo;
-import com.intellij.notification.NotificationGroupManager;
-import com.intellij.notification.NotificationType;
 import com.intellij.openapi.Disposable;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.components.Service;
@@ -11,8 +9,9 @@ import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.editor.colors.EditorColorsManager;
 import com.intellij.openapi.editor.colors.EditorColorsScheme;
 import com.intellij.util.concurrency.AppExecutorUtil;
-import com.selectrum.model.ScheduleEntry;
-import com.selectrum.settings.SelectrumSettings;
+import com.selectrum.application.component.ThemeFinder;
+import com.selectrum.domain.model.ScheduleEntry;
+import com.selectrum.infrastructure.settings.SelectrumSettings;
 import com.selectrum.utils.NotificationUtils;
 
 import java.time.Duration;
@@ -20,7 +19,6 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.Comparator;
-import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
@@ -42,8 +40,19 @@ public final class SelectrumScheduler implements Disposable {
     private volatile String lastAppliedTheme;
     private volatile String lastAppliedEditor;
 
-    public static SelectrumScheduler getInstance() {
+    public static SelectrumScheduler instance() {
         return ApplicationManager.getApplication().getService(SelectrumScheduler.class);
+    }
+
+    @Override
+    public synchronized void dispose() {
+        if (scheduledTask == null) {
+            LOG.info("Selectrum scheduler stopped");
+            return;
+        }
+
+        scheduledTask.cancel(false);
+        scheduledTask = null;
     }
 
     public void start() {
@@ -56,17 +65,19 @@ public final class SelectrumScheduler implements Disposable {
             scheduledTask = null;
         }
 
-        if (!SelectrumSettings.getInstance().isEnabled()) {
+        if (!SelectrumSettings.instance().isEnabled()) {
             return;
         }
 
-        List<ScheduleEntry> schedule = SelectrumConfigService.getInstance().getSchedule();
+        List<ScheduleEntry> schedule = SelectrumConfigService.instance().getSchedule();
         if (schedule.isEmpty()) {
             return;
         }
 
         LocalTime now = LocalTime.now();
-        ScheduleEntry activeEntry = findActiveEntry(schedule, now);
+
+        ScheduleEntry activeEntry = ThemeFinder
+                .instance().findActiveEntry(schedule, now);
 
         if (activeEntry != null) {
             applyThemeChanges(activeEntry);
@@ -126,25 +137,6 @@ public final class SelectrumScheduler implements Disposable {
                 );
     }
 
-    private ScheduleEntry findActiveEntry(List<ScheduleEntry> entries, LocalTime now) {
-        List<ScheduleEntry> sorted = entries.stream()
-                .sorted(Comparator.comparing(ScheduleEntry::getParsedTime))
-                .toList();
-
-        ScheduleEntry active = null;
-        for (ScheduleEntry entry : sorted) {
-            if (!entry.getParsedTime().isAfter(now)) {
-                active = entry;
-            }
-        }
-
-        if (active == null) {
-            active = sorted.getLast();
-        }
-
-        return active;
-    }
-
     private void applyThemeAndEditor(ScheduleEntry entry, boolean themeChanged, boolean editorChanged) {
         ApplicationManager.getApplication().invokeLater(() -> {
             if (themeChanged) {
@@ -159,7 +151,9 @@ public final class SelectrumScheduler implements Disposable {
 
     private void applyLafTheme(String themeName) {
         LafManager lafManager = LafManager.getInstance();
-        UIThemeLookAndFeelInfo targetLaf = findThemeByName(lafManager, themeName);
+
+        UIThemeLookAndFeelInfo targetLaf =
+                ThemeFinder.instance().findThemeByName(lafManager, themeName);
 
         if (targetLaf != null) {
             lafManager.setCurrentUIThemeLookAndFeel(targetLaf);
@@ -169,7 +163,7 @@ public final class SelectrumScheduler implements Disposable {
         }
 
         NotificationUtils.notifyWarning("Theme '" + themeName
-                + "' is not installed. Check your selectrum.yaml configuration.");
+                + "' not found. Check your selectrum.yaml configuration.");
     }
 
     private void applyEditorColorScheme(ScheduleEntry entry) {
@@ -177,7 +171,7 @@ public final class SelectrumScheduler implements Disposable {
                 entry.getEffectiveEditor();
 
         EditorColorsScheme targetScheme =
-                findEditorSchemeByName(effectiveEditor);
+                ThemeFinder.instance().findEditorSchemeByName(effectiveEditor);
 
         if (targetScheme != null) {
             EditorColorsManager.getInstance().setGlobalScheme(targetScheme);
@@ -187,50 +181,12 @@ public final class SelectrumScheduler implements Disposable {
         }
 
         if (entry.getEditor() != null) {
-            notifyEditorNotFound(effectiveEditor, EditorColorsManager.getInstance().getAllSchemes());
+            NotificationUtils.notifyWarning("Editor scheme '"
+                    + effectiveEditor + "' not found. Check your selectrum.yaml configuration.");
             return;
         }
 
         lastAppliedEditor = effectiveEditor;
-    }
-
-    private UIThemeLookAndFeelInfo findThemeByName(LafManager lafManager, String name) {
-        Iterator<UIThemeLookAndFeelInfo> themes =
-                lafManager.getInstalledThemes().iterator();
-
-        while (themes.hasNext()) {
-            UIThemeLookAndFeelInfo theme = themes.next();
-
-            if (theme.getName().equals(name)) {
-                return theme;
-            }
-        }
-
-        return null;
-    }
-
-    private EditorColorsScheme findEditorSchemeByName(String name) {
-        EditorColorsScheme[] allSchemes =
-                EditorColorsManager.getInstance().getAllSchemes();
-
-        for (EditorColorsScheme scheme : allSchemes) {
-            if (scheme.getName().equals(name)) return scheme;
-        }
-
-        for (EditorColorsScheme scheme : allSchemes) {
-            if (scheme.getDisplayName().equals(name)) {
-                return scheme;
-            }
-        }
-
-        for (EditorColorsScheme scheme : allSchemes) {
-            if (scheme.getName().equalsIgnoreCase(name)
-                    || scheme.getDisplayName().equalsIgnoreCase(name)) {
-                return scheme;
-            }
-        }
-
-        return null;
     }
 
     private void checkAndApplyThemeSafely() {
@@ -239,39 +195,5 @@ public final class SelectrumScheduler implements Disposable {
         } catch (Exception e) {
             LOG.error("Error during Selectrum theme check", e);
         }
-    }
-
-    private void notifyEditorNotFound(String editorName, EditorColorsScheme[] allSchemes) {
-        StringBuilder message = new StringBuilder();
-
-        message.append("Editor color scheme '")
-                .append(editorName)
-                .append("' not found.\n");
-
-        message.append("Available schemes: ");
-
-        for (int i = 0; i < allSchemes.length; i++) {
-            if (i > 0) message.append(", ");
-            message.append(allSchemes[i].getDisplayName());
-        }
-
-        NotificationGroupManager.getInstance()
-                .getNotificationGroup("Selectrum")
-                .createNotification(
-                        "Selectrum",
-                        message.toString(),
-                        NotificationType.WARNING)
-                .notify(null);
-    }
-
-    @Override
-    public synchronized void dispose() {
-        if (scheduledTask == null) {
-            LOG.info("Selectrum scheduler stopped");
-            return;
-        }
-
-        scheduledTask.cancel(false);
-        scheduledTask = null;
     }
 }

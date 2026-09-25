@@ -13,14 +13,14 @@
         <statusBarWidgetFactory id="SelectrumWidget"
                                 implementation="com.selectrum.widget.SelectrumStatusBarWidgetFactory"
                                 order="after Position"/>
-        <postStartupActivity implementation="com.selectrum.startup.SelectrumStartupListener"/>
+        <postStartupActivity implementation="com.selectrum.Selectrum"/>
     </extensions>
 
     <actions>
         <group id="Selectrum.Menu" text="Selectrum" popup="true">
             <add-to-group group-id="ToolsMenu" anchor="last"/>
             <action id="Selectrum.OpenConfig"
-                    class="com.selectrum.action.OpenSelectrumConfigAction"
+                    class="com.selectrum.infrastructure.action.OpenSelectrumConfigAction"
                     text="Open Configuration"
                     description="Open the Selectrum theme schedule configuration file"/>
         </group>

@@ -1,4 +1,4 @@
-package com.selectrum.settings;
+package com.selectrum.infrastructure.settings;
 
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.components.PersistentStateComponent;
@@ -6,6 +6,7 @@ import com.intellij.openapi.components.Service;
 import com.intellij.openapi.components.State;
 import com.intellij.openapi.components.Storage;
 import com.intellij.util.xmlb.XmlSerializerUtil;
+import com.selectrum.domain.vo.SettingState;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -14,26 +15,26 @@ import org.jetbrains.annotations.NotNull;
  */
 @Service(Service.Level.APP)
 @State(name = "SelectrumSettings", storages = @Storage("selectrum-settings.xml"))
-public final class SelectrumSettings implements PersistentStateComponent<SelectrumSettings.State> {
+public final class SelectrumSettings implements PersistentStateComponent<SettingState> {
 
-    public static SelectrumSettings getInstance() {
+    private final SettingState crrState;
+
+    SelectrumSettings() {
+        crrState = new SettingState();
+    }
+
+    public static SelectrumSettings instance() {
         return ApplicationManager
                 .getApplication().getService(SelectrumSettings.class);
     }
 
-    private final State crrState = new State();
-
-    public static class State {
-        public boolean enabled = true;
-    }
-
     @Override
-    public @NotNull State getState() {
+    public @NotNull SettingState getState() {
         return crrState;
     }
 
     @Override
-    public void loadState(@NotNull State state) {
+    public void loadState(@NotNull SettingState state) {
         XmlSerializerUtil.copyBean(state, crrState);
     }
 
