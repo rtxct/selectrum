@@ -12,6 +12,7 @@ import com.intellij.util.concurrency.AppExecutorUtil;
 import com.selectrum.application.component.ThemeFinder;
 import com.selectrum.domain.model.ScheduleEntry;
 import com.selectrum.infrastructure.settings.SelectrumSettings;
+import org.jetbrains.annotations.NotNull;
 
 import java.time.Duration;
 import java.time.LocalDate;
@@ -34,15 +35,33 @@ public final class SelectrumScheduler implements Disposable {
 
     private static final Logger LOG = Logger.getInstance(SelectrumScheduler.class);
 
+    /**
+     * The task scheduled for the next theme update.
+     */
     private ScheduledFuture<?> scheduledTask;
 
+    /**
+     * The name of the last applied IDE theme.
+     */
     private volatile String lastAppliedTheme;
+
+    /**
+     * The name of the last applied editor color scheme.
+     */
     private volatile String lastAppliedEditor;
 
-    public static SelectrumScheduler instance() {
+    /**
+     * Retrieves the singleton instance of the {@code SelectrumScheduler}.
+     *
+     * @return the instance of {@code SelectrumScheduler}.
+     */
+    public static @NotNull SelectrumScheduler instance() {
         return ApplicationManager.getApplication().getService(SelectrumScheduler.class);
     }
 
+    /**
+     * Disposes of the scheduler, canceling any pending scheduled tasks.
+     */
     @Override
     public synchronized void dispose() {
         if (scheduledTask == null) {
@@ -54,10 +73,18 @@ public final class SelectrumScheduler implements Disposable {
         scheduledTask = null;
     }
 
+    /**
+     * Starts the scheduler by immediately checking the current time against the schedule
+     * and applying the necessary theme.
+     */
     public void start() {
         checkAndApplyTheme();
     }
 
+    /**
+     * Checks the current schedule and applies the appropriate theme based on the time.
+     * Also schedules the next evaluation.
+     */
     public synchronized void checkAndApplyTheme() {
         if (scheduledTask != null) {
             scheduledTask.cancel(false);
@@ -85,7 +112,12 @@ public final class SelectrumScheduler implements Disposable {
         scheduleNextRun(schedule, now);
     }
 
-    private void applyThemeChanges(ScheduleEntry activeEntry) {
+    /**
+     * Applies theme and editor changes if they differ from the currently applied ones.
+     *
+     * @param activeEntry the active schedule entry containing the target theme and editor.
+     */
+    private void applyThemeChanges(@NotNull ScheduleEntry activeEntry) {
         String targetTheme = activeEntry.getTheme();
         String targetEditor = activeEntry.getEffectiveEditor();
 
@@ -99,7 +131,13 @@ public final class SelectrumScheduler implements Disposable {
         applyThemeAndEditor(activeEntry, themeChanged, editorChanged);
     }
 
-    private void scheduleNextRun(List<ScheduleEntry> schedule, LocalTime now) {
+    /**
+     * Schedules the next run of the scheduler to occur when the next schedule entry becomes active.
+     *
+     * @param schedule the list of configured schedule entries.
+     * @param now      the current local time.
+     */
+    private void scheduleNextRun(@NotNull List<ScheduleEntry> schedule, @NotNull LocalTime now) {
         List<ScheduleEntry> sorted = schedule.stream()
                 .sorted(Comparator.comparing(ScheduleEntry::getParsedTime))
                 .toList();
@@ -136,7 +174,14 @@ public final class SelectrumScheduler implements Disposable {
                 );
     }
 
-    private void applyThemeAndEditor(ScheduleEntry entry, boolean themeChanged, boolean editorChanged) {
+    /**
+     * Invokes the theme and editor updates on the EDT (Event Dispatch Thread).
+     *
+     * @param entry         the active schedule entry.
+     * @param themeChanged  whether the IDE theme has changed.
+     * @param editorChanged whether the editor color scheme has changed.
+     */
+    private void applyThemeAndEditor(@NotNull ScheduleEntry entry, boolean themeChanged, boolean editorChanged) {
         ApplicationManager.getApplication().invokeLater(() -> {
             if (themeChanged) {
                 applyLafTheme(entry.getTheme());
@@ -148,7 +193,12 @@ public final class SelectrumScheduler implements Disposable {
         });
     }
 
-    private void applyLafTheme(String themeName) {
+    /**
+     * Applies the Look and Feel (LaF) theme by its name.
+     *
+     * @param themeName the name of the theme to apply.
+     */
+    private void applyLafTheme(@NotNull String themeName) {
         LafManager lafManager = LafManager.getInstance();
 
         UIThemeLookAndFeelInfo targetLaf =
@@ -164,7 +214,12 @@ public final class SelectrumScheduler implements Disposable {
         LOG.warn("Selectrum: theme '" + themeName + "' not found.");
     }
 
-    private void applyEditorColorScheme(ScheduleEntry entry) {
+    /**
+     * Applies the editor color scheme specified in the schedule entry.
+     *
+     * @param entry the schedule entry containing the target editor color scheme.
+     */
+    private void applyEditorColorScheme(@NotNull ScheduleEntry entry) {
         String effectiveEditor =
                 entry.getEffectiveEditor();
 
@@ -185,6 +240,9 @@ public final class SelectrumScheduler implements Disposable {
         lastAppliedEditor = effectiveEditor;
     }
 
+    /**
+     * Safely executes the theme check and application, catching and logging any exceptions.
+     */
     private void checkAndApplyThemeSafely() {
         try {
             checkAndApplyTheme();

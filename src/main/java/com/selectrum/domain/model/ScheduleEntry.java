@@ -3,6 +3,7 @@ package com.selectrum.domain.model;
 import com.selectrum.utils.TimeUtils;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import org.jetbrains.annotations.NotNull;
 
 import java.time.LocalTime;
 import java.util.Objects;
@@ -20,12 +21,35 @@ import java.util.Objects;
 @EqualsAndHashCode
 public final class ScheduleEntry {
 
+    /**
+     * The configured hour in 24-hour format.
+     */
     private final String hour;
+
+    /**
+     * The name of the IDE theme to apply at the specified time.
+     */
     private final String theme;
+
+    /**
+     * The name of the editor color scheme to apply, or {@code null} if not specified.
+     */
     private final String editor;
+
+    /**
+     * The parsed representation of the hour as a {@link LocalTime} object.
+     */
     private final LocalTime parsedTime;
 
-    public ScheduleEntry(String hour, String theme, String editor) {
+    /**
+     * Constructs a new {@code ScheduleEntry} with the specified time, theme, and optional editor scheme.
+     *
+     * @param hour   the time of day in 24-hour format
+     * @param theme  the name of the IDE theme
+     * @param editor the name of the editor color scheme, or {@code null}
+     * @throws NullPointerException if {@code hour} or {@code theme} is null
+     */
+    public ScheduleEntry(@NotNull String hour, @NotNull String theme, @NotNull String editor) {
         this.hour = Objects.requireNonNull(hour, "hour must not be null");
         this.theme = Objects.requireNonNull(theme, "theme must not be null");
 
@@ -33,7 +57,12 @@ public final class ScheduleEntry {
         this.parsedTime = TimeUtils.parseTime(hour);
     }
 
-    public String getEffectiveEditor() {
+    /**
+     * Gets the effective editor color scheme to use.
+     *
+     * @return the explicitly configured editor scheme if present, otherwise the theme name
+     */
+    public @NotNull String getEffectiveEditor() {
         return editor != null ? editor : theme;
     }
 }

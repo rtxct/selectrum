@@ -30,51 +30,109 @@ import java.awt.event.MouseEvent;
  */
 public final class SelectrumStatusBarWidget implements StatusBarWidget, StatusBarWidget.IconPresentation {
 
+    /**
+     * The unique identifier for this widget.
+     */
     public static final String WIDGET_ID = "SelectrumWidget";
+    
+    /**
+     * The icon displayed by the widget.
+     */
     private static final Icon ICON = IconLoader.getIcon("/icons/selectrum.svg", SelectrumStatusBarWidget.class);
 
+    /**
+     * The project associated with this widget.
+     */
     private final Project project;
+    
+    /**
+     * The status bar instance where this widget is installed.
+     */
     private StatusBar statusBar;
 
+    /**
+     * Constructs a new {@link SelectrumStatusBarWidget} for the given project.
+     *
+     * @param project the project this widget belongs to, must not be null
+     */
     public SelectrumStatusBarWidget(@NotNull Project project) {
         this.project = project;
     }
 
+    /**
+     * Disposes the widget. Called when the widget is no longer needed.
+     */
     @Override
     public void dispose() { }
 
+    /**
+     * Returns the unique ID of the widget.
+     *
+     * @return the widget ID
+     */
     @Override
     public @NotNull String ID() {
         return WIDGET_ID;
     }
 
+    /**
+     * Installs the widget into the given status bar.
+     *
+     * @param statusBar the status bar to install the widget into, must not be null
+     */
     @Override
     public void install(@NotNull StatusBar statusBar) {
         this.statusBar = statusBar;
     }
 
+    /**
+     * Returns the presentation for this widget, which determines how it is displayed.
+     *
+     * @return the presentation for this widget
+     */
     @Override
-    public WidgetPresentation getPresentation() {
+    public @NotNull WidgetPresentation getPresentation() {
         return this;
     }
 
+    /**
+     * Returns the icon to be displayed in the status bar.
+     *
+     * @return the widget's icon
+     */
     @Override
-    public Icon getIcon() {
+    public @NotNull Icon getIcon() {
         return ICON;
     }
 
+    /**
+     * Returns the tooltip text to be shown when hovering over the widget.
+     * The text indicates whether Selectrum theme switching is enabled or disabled.
+     *
+     * @return the tooltip text
+     */
     @Override
-    public String getTooltipText() {
+    public @NotNull String getTooltipText() {
         boolean enabled = SelectrumSettings.instance().isEnabled();
         return "Selectrum: " + (enabled ? "Enabled" : "Disabled");
     }
 
+    /**
+     * Returns a consumer that handles click events on the widget.
+     *
+     * @return a consumer handling mouse events
+     */
     @Override
-    public Consumer<MouseEvent> getClickConsumer() {
+    public @NotNull Consumer<MouseEvent> getClickConsumer() {
         return this::showPopup;
     }
 
-    private void showPopup(MouseEvent event) {
+    /**
+     * Displays a popup menu when the widget is clicked.
+     *
+     * @param event the mouse event triggering the popup
+     */
+    private void showPopup(@NotNull MouseEvent event) {
         DefaultActionGroup group = new DefaultActionGroup();
 
         addGroupToggle(group);
@@ -90,7 +148,14 @@ public final class SelectrumStatusBarWidget implements StatusBarWidget, StatusBa
         popup.show(new RelativePoint(component, point));
     }
 
-    private @NotNull ListPopup getPopup(DefaultActionGroup group, Component component) {
+    /**
+     * Creates the popup menu from the action group.
+     *
+     * @param group     the action group to display in the popup
+     * @param component the component triggering the popup
+     * @return the created list popup, must not be null
+     */
+    private @NotNull ListPopup getPopup(@NotNull DefaultActionGroup group, @NotNull Component component) {
         return JBPopupFactory.getInstance().createActionGroupPopup(
                 "Selectrum",
                 group,
@@ -100,7 +165,12 @@ public final class SelectrumStatusBarWidget implements StatusBarWidget, StatusBa
         );
     }
 
-    private void addGroupConfigOpener(DefaultActionGroup group) {
+    /**
+     * Adds an action to the group for opening the configuration file.
+     *
+     * @param group the action group to add the configuration opener to
+     */
+    private void addGroupConfigOpener(@NotNull DefaultActionGroup group) {
         group.add(new AnAction("Open Configuration") {
             @Override
             public void actionPerformed(@NotNull AnActionEvent e) {
@@ -109,7 +179,12 @@ public final class SelectrumStatusBarWidget implements StatusBarWidget, StatusBa
         });
     }
 
-    private void addGroupToggle(DefaultActionGroup group) {
+    /**
+     * Adds a toggle action to the group for enabling or disabling theme switching.
+     *
+     * @param group the action group to add the toggle to
+     */
+    private void addGroupToggle(@NotNull DefaultActionGroup group) {
         group.add(new ToggleAction("Theme Switching") {
             @Override
             public boolean isSelected(@NotNull AnActionEvent e) {

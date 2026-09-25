@@ -15,6 +15,11 @@ import org.jetbrains.annotations.NotNull;
  */
 public final class OpenSelectrumConfigAction extends AnAction {
 
+    /**
+     * Performs the action to open the configuration file.
+     *
+     * @param e the action event carrying information about the current context
+     */
     @Override
     public void actionPerformed(@NotNull AnActionEvent e) {
         Project project = e.getProject();
@@ -25,11 +30,22 @@ public final class OpenSelectrumConfigAction extends AnAction {
         FileUtils.openConfigFile(project);
     }
 
+    /**
+     * Updates the state of the action based on the current context.
+     * Enables and makes the action visible only if a project is open.
+     *
+     * @param e the action event carrying information about the current context
+     */
     @Override
     public void update(@NotNull AnActionEvent e) {
         e.getPresentation().setEnabledAndVisible(e.getProject() != null);
     }
 
+    /**
+     * Specifies the thread on which the {@link #update(AnActionEvent)} method should be executed.
+     *
+     * @return the thread on which the action should be updated, which is the Event Dispatch Thread (EDT)
+     */
     @Override
     public @NotNull ActionUpdateThread getActionUpdateThread() {
         return ActionUpdateThread.EDT;

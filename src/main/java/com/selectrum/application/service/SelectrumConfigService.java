@@ -20,6 +20,7 @@ import com.selectrum.domain.model.ScheduleEntry;
 import com.selectrum.utils.NotificationUtils;
 import lombok.Getter;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.yaml.snakeyaml.Yaml;
 
 import java.io.IOException;
@@ -32,6 +33,9 @@ import java.util.Map;
 
 /**
  * Reads, parses, and watches the {@code selectrum.yaml} configuration file.
+ * This service is responsible for loading the theme schedule configuration,
+ * providing the current schedule, and listening for file system changes to
+ * automatically reload the configuration.
  */
 @Getter
 @Service(Service.Level.APP)
@@ -39,11 +43,26 @@ public final class SelectrumConfigService implements Disposable {
 
     private static final Logger LOG = Logger.getInstance(SelectrumConfigService.class);
 
+    /**
+     * The name of the configuration file.
+     */
     private static final String CONFIG_FILE_NAME = "selectrum.yaml";
 
+    /**
+     * The absolute path to the configuration file.
+     */
     private final Path configFilePath;
+
+    /**
+     * The current schedule parsed from the configuration file.
+     */
     private volatile List<ScheduleEntry> schedule;
 
+    /**
+     * Constructs a new {@code SelectrumConfigService}.
+     * Initializes the configuration file path, creates the default file if it does not exist,
+     * loads the initial configuration synchronously, and subscribes to future file changes.
+     */
     public SelectrumConfigService() {
         this.configFilePath = Path.of(PathManager.getConfigPath(), CONFIG_FILE_NAME);
         this.schedule = Collections.emptyList();
@@ -53,14 +72,25 @@ public final class SelectrumConfigService implements Disposable {
         subscribeToFileChanges();
     }
 
-    public static SelectrumConfigService instance() {
+    /**
+     * Retrieves the singleton instance of the {@code SelectrumConfigService}.
+     *
+     * @return the instance of {@code SelectrumConfigService}.
+     */
+    public static @NotNull SelectrumConfigService instance() {
         return ApplicationManager.getApplication().getService(SelectrumConfigService.class);
     }
 
+    /**
+     * Disposes of the service resources. This method is called when the service is torn down.
+     */
     @Override
     public void dispose() {
     }
 
+    /**
+     * Subscribes to virtual file system changes to watch for updates to the configuration file.
+     */
     private void subscribeToFileChanges() {
         ApplicationManager.getApplication().getMessageBus().connect(this)
                 .subscribe(VirtualFileManager.VFS_CHANGES, new BulkFileListener() {
@@ -76,10 +106,20 @@ public final class SelectrumConfigService implements Disposable {
                 });
     }
 
-    private boolean isConfigFileEvent(VFileEvent event) {
+    /**
+     * Checks whether the given virtual file event corresponds to the configuration file.
+     *
+     * @param event the file system event.
+     * @return {@code true} if the event relates to the config file, {@code false} otherwise.
+     */
+    private boolean isConfigFileEvent(@NotNull VFileEvent event) {
         return FileUtil.pathsEqual(event.getPath(), configFilePath.toString());
     }
 
+    /**
+     * Ensures that the configuration file exists. If it does not exist,
+     * creates a default {@code selectrum.yaml} file in the appropriate directory.
+     */
     private void ensureConfigFileExists() {
         if (Files.exists(configFilePath)) {
             return;
@@ -119,6 +159,10 @@ public final class SelectrumConfigService implements Disposable {
         }
     }
 
+    /**
+     * Loads the configuration file synchronously. If successful, updates the schedule.
+     * Typically used during the initial startup sequence.
+     */
     private void loadConfigSync() {
         VirtualFile virtualFile = LocalFileSystem
                 .getInstance().refreshAndFindFileByPath(configFilePath.toString());
@@ -147,6 +191,10 @@ public final class SelectrumConfigService implements Disposable {
         }
     }
 
+    /**
+     * Loads the configuration file asynchronously. If successful, updates the schedule
+     * and triggers a scheduler recheck.
+     */
     private void loadConfigAsync() {
         VirtualFile virtualFile = LocalFileSystem
                 .getInstance().findFileByPath(configFilePath.toString());
@@ -187,7 +235,14 @@ public final class SelectrumConfigService implements Disposable {
                 });
     }
 
-    private List<ScheduleEntry> parseSchedule(String yamlContent) {
+    /**
+     * Parses the YAML content into a list of schedule entries.
+     *
+     * @param yamlContent the YAML content of the configuration file as a string.
+     * @return a list of parsed {@link ScheduleEntry} instances.
+     * @throws IllegalArgumentException if the YAML format is invalid.
+     */
+    private @NotNull List<ScheduleEntry> parseSchedule(@NotNull String yamlContent) {
         Yaml yaml = new Yaml();
 
         Map<String, Object> root = yaml.load(yamlContent);
@@ -219,7 +274,14 @@ public final class SelectrumConfigService implements Disposable {
         return entries;
     }
 
-    private String resolveHourKey(Object key) {
+    /**
+     * Resolves the key from the YAML map into a valid hour string.
+     *
+     * @param key the key object from the YAML map.
+     * @return a formatted hour string (e.g., "08:00").
+     * @throws IllegalArgumentException if the key cannot be resolved to a valid hour.
+     */
+    private @NotNull String resolveHourKey(@NotNull Object key) {
         if (key instanceof String s) {
             return s;
         }
@@ -236,6 +298,9 @@ public final class SelectrumConfigService implements Disposable {
                 "Invalid hour key: '" + key + "'. Hours must be quoted strings.");
     }
 
+    /**
+     * Triggers a recheck of the theme schedule by invoking the scheduler.
+     */
     private void triggerSchedulerRecheck() {
         SelectrumScheduler scheduler = ApplicationManager
                 .getApplication().getServiceIfCreated(SelectrumScheduler.class);
@@ -245,8 +310,17 @@ public final class SelectrumConfigService implements Disposable {
         }
     }
 
+    /**
+     * Retrieves a required string value from a configuration map.
+     *
+     * @param map         the configuration map.
+     * @param field       the key of the field to retrieve.
+     * @param hourContext the hour string for context in error messages.
+     * @return the string value of the field.
+     * @throws IllegalArgumentException if the field is missing.
+     */
     @SuppressWarnings("SameParameterValue")
-    private String getRequiredString(Map<?, ?> map, String field, String hourContext) {
+    private @NotNull String getRequiredString(@NotNull Map<?, ?> map, @NotNull String field, @NotNull String hourContext) {
         Object value = map.get(field);
         if (value == null) {
             throw new IllegalArgumentException(
@@ -255,13 +329,26 @@ public final class SelectrumConfigService implements Disposable {
         return value.toString();
     }
 
+    /**
+     * Retrieves an optional string value from a configuration map.
+     *
+     * @param map   the configuration map.
+     * @param field the key of the field to retrieve.
+     * @return the string value of the field, or {@code null} if the field is missing.
+     */
     @SuppressWarnings("SameParameterValue")
-    private String getOptionalString(Map<?, ?> map, String field) {
+    private @Nullable String getOptionalString(@NotNull Map<?, ?> map, @NotNull String field) {
         Object value = map.get(field);
         return value != null ? value.toString() : null;
     }
 
-    private void validateSchedule(List<ScheduleEntry> entries) {
+    /**
+     * Validates the parsed schedule entries against the currently installed IDE themes
+     * and editor schemes, issuing warnings if they are not found.
+     *
+     * @param entries the list of schedule entries to validate.
+     */
+    private void validateSchedule(@NotNull List<ScheduleEntry> entries) {
         LafManager lafManager = LafManager.getInstance();
         ThemeFinder finder = ThemeFinder.instance();
 
