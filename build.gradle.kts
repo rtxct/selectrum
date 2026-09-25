@@ -10,7 +10,7 @@ plugins {
 }
 
 group = "com.selectrum"
-version = "1.0.0"
+version = "SNAPSHOT-1.0.0"
 
 repositories {
     // Use Maven Central for resolving dependencies.
@@ -59,4 +59,9 @@ intellijPlatform {
             sinceBuild.set("251")
         }
     }
+}
+
+tasks.buildPlugin {
+    // Defines the name of the final distributable plugin file
+    archiveFileName.set("selectrum.zip")
 }
