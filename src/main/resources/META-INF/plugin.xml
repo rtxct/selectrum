@@ -1,7 +1,7 @@
 <idea-plugin>
     <id>com.selectrum</id>
     <name>Selectrum</name>
-    <vendor>selectrum</vendor>
+    <vendor>rtxct</vendor>
     <description><![CDATA[
         Auto select the JetBrains IDE's color spectrum by the time of the day.
     ]]></description>

@@ -1,0 +1,547 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   viewBox="0 0 40 40"
+   width="40"
+   height="40"
+   shape-rendering="crispEdges"
+   version="1.1"
+   id="svg77"
+   sodipodi:docname="selectrum.svg"
+   inkscape:version="1.4.4 (dcaf3e7d9e, 2026-05-05)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns:c2pa="http://c2pa.org/manifest">
+  <defs
+     id="defs77" />
+  <sodipodi:namedview
+     id="namedview77"
+     pagecolor="#505050"
+     bordercolor="#eeeeee"
+     borderopacity="1"
+     inkscape:showpageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#505050"
+     inkscape:zoom="32"
+     inkscape:cx="6.28125"
+     inkscape:cy="9.734375"
+     inkscape:window-width="1920"
+     inkscape:window-height="1080"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="svg77" />
+  <metadata
+     id="metadata1">
+    <c2pa:manifest>AAAWgmp1bWIAAAAeanVtZGMycGEAEQAQgAAAqgA4m3EDYzJwYQAAABZcanVtYgAAAEdqdW1kYzJtYQARABCAAACqADibcQN1cm46YzJwYTo0OGY4NmMwYi1jMzkyLTQzY2UtYTk0NC0yN2E1ZDBhOWI2ZjUAAAADl2p1bWIAAAApanVtZGMyYXMAEQAQgAAAqgA4m3EDYzJwYS5hc3NlcnRpb25zAAAAALxqdW1iAAAARGp1bWRjYm9yABEAEIAAAKoAOJtxE2MycGEuaW5ncmVkaWVudC52MwAAAAAYYzJzaKzPI8b9DarofhVS7wSU7sUAAABwY2JvcqNpZGM6Zm9ybWF0bWltYWdlL3N2Zyt4bWxqaW5zdGFuY2VJRHgseG1wOmlpZDozOWFmNGZkZC0yZmNmLTRmMTMtODEzYi1hMDAxZjYwNmM4ODVscmVsYXRpb25zaGlwaHBhcmVudE9mAAAB4mp1bWIAAABBanVtZGNib3IAEQAQgAAAqgA4m3ETYzJwYS5hY3Rpb25zLnYyAAAAABhjMnNoGi6K8y8M4rDMIgwD3PHDLwAAAZljYm9yomdhY3Rpb25zgqJmYWN0aW9ua2MycGEub3BlbmVkanBhcmFtZXRlcnOha2luZ3JlZGllbnRzgaJjdXJseC1zZWxmI2p1bWJmPWMycGEuYXNzZXJ0aW9ucy9jMnBhLmluZ3JlZGllbnQudjNkaGFzaFggdstEkJIOY3FGinKuY6x8LeFYKKxkVSh3RR9D04jWvVukZmFjdGlvbngdY29tLmFudGhyb3BpYy5jbGF1ZGUucHJvdmlkZWRqcGFyYW1ldGVyc6F4H2NvbS5hbnRocm9waWMub3JpZ2luLWNvbmZpZGVuY2VndW5rbm93bmtkZXNjcmlwdGlvbnhmQ2xhdWRlIHByb3ZpZGVkIHRoaXMgZmlsZSBhdCB0aGUgcmVxdWVzdCBvZiBhIHVzZXIgYW5kIG1heSBoYXZlIGNyZWF0ZWQgb3IgbW9kaWZpZWQgdGhlIGZpbGUgY29udGVudHMubXNvZnR3YXJlQWdlbnShZG5hbWVmQ2xhdWRlcmFsbEFjdGlvbnNJbmNsdWRlZPUAAADIanVtYgAAAEBqdW1kY2JvcgARABCAAACqADibcRNjMnBhLmhhc2guZGF0YQAAAAAYYzJzaOHD7RbeuajTU6ykfsmg88cAAACAY2JvcqVjYWxnZnNoYTI1NmNwYWRMAAAAAAAAAAAAAAAAZGhhc2hYIHpLCQ97BqemoAFUzwPlapofe9G6a/gufq2YMyLTHZoCZG5hbWVuanVtYmYgbWFuaWZlc3RqZXhjbHVzaW9uc4GiZXN0YXJ0GQRoZmxlbmd0aBkeBAAAAj5qdW1iAAAAJ2p1bWRjMmNsABEAEIAAAKoAOJtxA2MycGEuY2xhaW0udjIAAAACD2Nib3KlY2FsZ2ZzaGEyNTZpc2lnbmF0dXJleE1zZWxmI2p1bWJmPS9jMnBhL3VybjpjMnBhOjQ4Zjg2YzBiLWMzOTItNDNjZS1hOTQ0LTI3YTVkMGE5YjZmNS9jMnBhLnNpZ25hdHVyZWppbnN0YW5jZUlEeCx4bXA6aWlkOjFlZTRiYzYzLTJjZjItNGU1OC1hOTQ3LTM1YjY4MDYzYzllM3JjcmVhdGVkX2Fzc2VydGlvbnODomN1cmx4LXNlbGYjanVtYmY9YzJwYS5hc3NlcnRpb25zL2MycGEuaW5ncmVkaWVudC52M2RoYXNoWCB2y0SQkg5jcUaKcq5jrHwt4VgorGRVKHdFH0PTiNa9W6JjdXJseCpzZWxmI2p1bWJmPWMycGEuYXNzZXJ0aW9ucy9jMnBhLmFjdGlvbnMudjJkaGFzaFgg6tKAZslbWDpKndlVZhxuk2AIlIvuOO9RUAUtTW78DueiY3VybHgpc2VsZiNqdW1iZj1jMnBhLmFzc2VydGlvbnMvYzJwYS5oYXNoLmRhdGFkaGFzaFggNpYWZQIVNHToW5TxIuT2C/+AHOYXNXScVxu/Jzw1kRp0Y2xhaW1fZ2VuZXJhdG9yX2luZm+jZG5hbWVvQW50aHJvcGljIEZpbGVzZ3ZlcnNpb25lMS4wLjBrc3BlY1ZlcnNpb25lMi40LjAAABA4anVtYgAAAChqdW1kYzJjcwARABCAAACqADibcQNjMnBhLnNpZ25hdHVyZQAAABAIY2JvctKEWQISogEmGCFZAgowggIGMIIBjaADAgECAhRA5aAK7sI50L64g/oGQgU9Z1UTADAKBggqhkjOPQQDAzBJMRcwFQYDVQQKEw5BbnRocm9waWMsIFBCQzEuMCwGA1UEAxMlQW50aHJvcGljIENvbnRlbnQgQ3JlZGVudGlhbHMgUm9vdCBDQTAeFw0yNjA4MDcxODQzNTZaFw0yODA4MDYxOTQzNTZaMEQxFzAVBgNVBAoTDkFudGhyb3BpYywgUEJDMSkwJwYDVQQDEyBBbnRocm9waWMgQ2xhdWRlIENvbnRlbnQgU2lnbmluZzBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABJh6CmvLUBgFFNU0vUKlOVtE6djd17L5SuwX0LemFisBM3dkd/3cyjxFA3Qo5S46fX0/ihY0VZ7mfb9KF703t5OjWDBWMA4GA1UdDwEB/wQEAwIHgDAVBgNVHSUEDjAMBgorBgEEAYPoXgIBMAwGA1UdEwEB/wQCMAAwHwYDVR0jBBgwFoAUzlHiBIFOZFsj+OPEz5o+nMHXXMIwCgYIKoZIzj0EAwMDZwAwZAIwMXMdFJ4BetLLVY7ORuE9noqbbAZOZn/aArXyTwFAZfKrPzxF2vPoJNf1+UCdg1XGAjBwX1zd9WGqYkqmL5SFqw1QySjr1zJfpJM9+1rdDwSPLMOPOjKuiXjoU/pUUeG9RwmhY3BhZFkNngAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPZYQMl4hf/6Wm+IeUlQ/TinGNSzKW9FL1iGcUgLKKBoLgNlo0jDGAJvjcWKOTR9e0ZkmS2HHSouvGmUS3AHeE/Xs9A=</c2pa:manifest>
+  </metadata>
+  <rect
+     x="15"
+     y="7.5"
+     width="2.5"
+     height="2.5"
+     fill="#ababaa"
+     id="rect1" />
+  <rect
+     x="17.5"
+     y="7.5"
+     width="2.5"
+     height="2.5"
+     fill="#a1a1a0"
+     id="rect2" />
+  <rect
+     x="20"
+     y="7.5"
+     width="2.5"
+     height="2.5"
+     fill="#8a8a89"
+     id="rect3" />
+  <rect
+     x="22.5"
+     y="7.5"
+     width="2.5"
+     height="2.5"
+     fill="#a4a4a4"
+     id="rect4" />
+  <rect
+     x="30"
+     y="7.5"
+     width="2.5"
+     height="2.5"
+     fill="#626261"
+     id="rect5"
+     style="fill:#b3b3b3" />
+  <rect
+     x="12.5"
+     y="10"
+     width="2.5"
+     height="2.5"
+     fill="#b4b4b3"
+     id="rect6"
+     style="fill:#f9f9f9" />
+  <rect
+     x="15"
+     y="10"
+     width="2.5"
+     height="2.5"
+     fill="#9d9d9d"
+     id="rect7"
+     style="fill:#f9f9f9" />
+  <rect
+     x="17.5"
+     y="10"
+     width="2.5"
+     height="2.5"
+     fill="#797878"
+     id="rect8" />
+  <rect
+     x="20"
+     y="10"
+     width="2.5"
+     height="2.5"
+     fill="#878686"
+     id="rect9" />
+  <rect
+     x="22.5"
+     y="10"
+     width="2.5"
+     height="2.5"
+     fill="#8c8c8b"
+     id="rect10"
+     style="fill:#b3b3b3" />
+  <rect
+     x="25"
+     y="10"
+     width="2.5"
+     height="2.5"
+     fill="#878686"
+     id="rect11" />
+  <rect
+     x="27.5"
+     y="10"
+     width="2.5"
+     height="2.5"
+     fill="#535353"
+     id="rect12"
+     style="fill:#b3b3b3" />
+  <rect
+     x="30"
+     y="10"
+     width="2.5"
+     height="2.5"
+     fill="#8b8a8a"
+     id="rect13"
+     style="fill:#b3b3b3" />
+  <rect
+     x="7.5"
+     y="12.5"
+     width="2.5"
+     height="2.5"
+     fill="#8f8f8f"
+     id="rect14" />
+  <rect
+     x="12.5"
+     y="12.5"
+     width="2.5"
+     height="2.5"
+     fill="#b9b9b9"
+     id="rect15"
+     style="fill:#f9f9f9" />
+  <rect
+     x="15"
+     y="12.5"
+     width="2.5"
+     height="2.5"
+     fill="#50504f"
+     id="rect16"
+     style="fill:#999999" />
+  <rect
+     x="25"
+     y="12.5"
+     width="2.5"
+     height="2.5"
+     fill="#5a5a5a"
+     id="rect19"
+     style="fill:#b3b3b3" />
+  <rect
+     x="27.5"
+     y="12.5"
+     width="2.5"
+     height="2.5"
+     fill="#ababab"
+     id="rect20"
+     style="fill:#b3b3b3" />
+  <rect
+     x="7.5"
+     y="15"
+     width="2.5"
+     height="2.5"
+     fill="#808080"
+     id="rect21" />
+  <rect
+     x="10"
+     y="15"
+     width="2.5"
+     height="2.5"
+     fill="#929292"
+     id="rect22"
+     style="fill:#f9f9f9" />
+  <rect
+     x="12.5"
+     y="15"
+     width="2.5"
+     height="2.5"
+     fill="#929292"
+     id="rect22-6"
+     style="fill:#f9f9f9" />
+  <rect
+     x="15"
+     y="15"
+     width="2.5"
+     height="2.5"
+     fill="#5c5c5c"
+     id="rect23"
+     style="fill:#999999" />
+  <rect
+     x="10"
+     y="17.5"
+     width="2.5"
+     height="2.5"
+     fill="#292928"
+     id="rect25"
+     style="fill:#4d4d4d" />
+  <rect
+     x="12.5"
+     y="17.5"
+     width="2.5"
+     height="2.5"
+     fill="#aaaaa9"
+     id="rect26" />
+  <rect
+     x="15"
+     y="17.5"
+     width="2.5"
+     height="2.5"
+     fill="#bababa"
+     id="rect27" />
+  <rect
+     x="17.5"
+     y="17.5"
+     width="2.5"
+     height="2.5"
+     fill="#0f0f0f"
+     id="rect28"
+     style="fill:#999999" />
+  <rect
+     x="12.5"
+     y="20"
+     width="2.5"
+     height="2.5"
+     fill="#454545"
+     id="rect32" />
+  <rect
+     x="15"
+     y="20"
+     width="2.5"
+     height="2.5"
+     fill="#212121"
+     id="rect33"
+     style="fill:#4d4d4d" />
+  <rect
+     x="17.5"
+     y="20"
+     width="2.5"
+     height="2.5"
+     fill="#000000"
+     id="rect34"
+     style="fill:#666666" />
+  <rect
+     x="20"
+     y="20"
+     width="2.5"
+     height="2.5"
+     fill="#090909"
+     id="rect35"
+     style="fill:#4d4d4d" />
+  <rect
+     x="22.5"
+     y="20"
+     width="2.5"
+     height="2.5"
+     fill="#222222"
+     id="rect36"
+     style="fill:#4d4d4d" />
+  <rect
+     x="25"
+     y="20"
+     width="2.5"
+     height="2.5"
+     fill="#0f0f0e"
+     id="rect37"
+     style="fill:#666666" />
+  <rect
+     x="17.5"
+     y="22.5"
+     width="2.5"
+     height="2.5"
+     fill="#a3a3a3"
+     id="rect39"
+     style="fill:#4d4d4d" />
+  <rect
+     x="20"
+     y="22.5"
+     width="2.5"
+     height="2.5"
+     fill="#585858"
+     id="rect40"
+     style="fill:#4d4d4d" />
+  <rect
+     x="22.5"
+     y="22.5"
+     width="2.5"
+     height="2.5"
+     fill="#0b0b0a"
+     id="rect41"
+     style="fill:#666666" />
+  <rect
+     x="25"
+     y="22.5"
+     width="2.5"
+     height="2.5"
+     fill="#252525"
+     id="rect42"
+     style="fill:#666666" />
+  <rect
+     x="27.5"
+     y="22.5"
+     width="2.5"
+     height="2.5"
+     fill="#161615"
+     id="rect43"
+     style="fill:#4d4d4d" />
+  <rect
+     x="5"
+     y="25"
+     width="2.5"
+     height="2.5"
+     fill="#c0c0c0"
+     id="rect44"
+     style="fill:#4d4d4d" />
+  <rect
+     x="7.5"
+     y="25"
+     width="2.5"
+     height="2.5"
+     fill="#aeaead"
+     id="rect45"
+     style="fill:#4d4d4d" />
+  <rect
+     x="22.5"
+     y="25"
+     width="2.5"
+     height="2.5"
+     fill="#1d1d1d"
+     id="rect48"
+     style="fill:#4d4d4d" />
+  <rect
+     x="25"
+     y="25"
+     width="2.5"
+     height="2.5"
+     fill="#0c0c0c"
+     id="rect49"
+     style="fill:#4d4d4d" />
+  <rect
+     x="27.5"
+     y="25"
+     width="2.5"
+     height="2.5"
+     fill="#111111"
+     id="rect50"
+     style="fill:#666666" />
+  <rect
+     x="7.5"
+     y="27.5"
+     width="2.5"
+     height="2.5"
+     fill="#191919"
+     id="rect52"
+     style="fill:#4d4d4d" />
+  <rect
+     x="10"
+     y="27.5"
+     width="2.5"
+     height="2.5"
+     fill="#262626"
+     id="rect53"
+     style="fill:#4d4d4d" />
+  <rect
+     x="20"
+     y="27.5"
+     width="2.5"
+     height="2.5"
+     fill="#161616"
+     id="rect57"
+     style="fill:#4d4d4d" />
+  <rect
+     x="22.5"
+     y="27.5"
+     width="2.5"
+     height="2.5"
+     fill="#050505"
+     id="rect58"
+     style="fill:#666666" />
+  <rect
+     x="25"
+     y="27.5"
+     width="2.5"
+     height="2.5"
+     fill="#0b0b0b"
+     id="rect59"
+     style="fill:#4d4d4d" />
+  <rect
+     x="27.5"
+     y="27.5"
+     width="2.5"
+     height="2.5"
+     fill="#000000"
+     id="rect60"
+     style="fill:#666666" />
+  <rect
+     x="7.5"
+     y="30"
+     width="2.5"
+     height="2.5"
+     fill="#858585"
+     id="rect62"
+     style="fill:#4d4d4d" />
+  <rect
+     x="10"
+     y="30"
+     width="2.5"
+     height="2.5"
+     fill="#000000"
+     id="rect63"
+     style="fill:#666666" />
+  <rect
+     x="12.5"
+     y="30"
+     width="2.5"
+     height="2.5"
+     fill="#010100"
+     id="rect64"
+     style="fill:#666666" />
+  <rect
+     x="15"
+     y="30"
+     width="2.5"
+     height="2.5"
+     fill="#030303"
+     id="rect65"
+     style="fill:#666666" />
+  <rect
+     x="17.5"
+     y="30"
+     width="2.5"
+     height="2.5"
+     fill="#000000"
+     id="rect66"
+     style="fill:#666666" />
+  <rect
+     x="20"
+     y="30"
+     width="2.5"
+     height="2.5"
+     fill="#010101"
+     id="rect67"
+     style="fill:#666666" />
+  <rect
+     x="22.5"
+     y="30"
+     width="2.5"
+     height="2.5"
+     fill="#000000"
+     id="rect68"
+     style="fill:#4d4d4d" />
+  <rect
+     x="25"
+     y="30"
+     width="2.5"
+     height="2.5"
+     fill="#000000"
+     id="rect69"
+     style="fill:#4d4d4d" />
+  <rect
+     x="10"
+     y="32.5"
+     width="2.5"
+     height="2.5"
+     fill="#a7a7a7"
+     id="rect71"
+     style="fill:#4d4d4d" />
+  <rect
+     x="12.5"
+     y="32.5"
+     width="2.5"
+     height="2.5"
+     fill="#343434"
+     id="rect72"
+     style="fill:#4d4d4d" />
+  <rect
+     x="15"
+     y="32.5"
+     width="2.5"
+     height="2.5"
+     fill="#050505"
+     id="rect73"
+     style="fill:#4d4d4d" />
+  <rect
+     x="17.5"
+     y="32.5"
+     width="2.5"
+     height="2.5"
+     fill="#090909"
+     id="rect74"
+     style="fill:#4d4d4d" />
+  <rect
+     x="20"
+     y="32.5"
+     width="2.5"
+     height="2.5"
+     fill="#080808"
+     id="rect75"
+     style="fill:#4d4d4d" />
+  <rect
+     x="22.5"
+     y="32.5"
+     width="2.5"
+     height="2.5"
+     fill="#575757"
+     id="rect76"
+     style="fill:#4d4d4d" />
+  <rect
+     x="10.0041"
+     y="10.004128"
+     width="2.5"
+     height="2.5"
+     fill="#b4b4b3"
+     id="rect6-6"
+     style="fill:#999999" />
+  <rect
+     x="10.004413"
+     y="12.501283"
+     width="2.5"
+     height="2.5"
+     fill="#b4b4b3"
+     id="rect6-5"
+     style="fill:#f9f9f9" />
+  <rect
+     x="12.497609"
+     y="7.499858"
+     width="2.5"
+     height="2.5"
+     fill="#ababaa"
+     id="rect1-5" />
+</svg>
