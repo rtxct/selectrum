@@ -144,7 +144,7 @@ public final class SelectrumConfigService implements Disposable {
                     
                     schedule:
                       08:00:
-                        theme: IntelliJ Light
+                        theme: Light
                       18:00:
                         theme: Light
                         editor: Darcula

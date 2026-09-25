@@ -206,8 +206,9 @@ public final class SelectrumScheduler implements Disposable {
 
         if (targetLaf != null) {
             lafManager.setCurrentUIThemeLookAndFeel(targetLaf);
-            lastAppliedTheme = themeName;
+            lafManager.updateUI();
 
+            lastAppliedTheme = themeName;
             return;
         }
 
