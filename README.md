@@ -11,7 +11,7 @@
 
 ## Configuration
 
-To set up your daily schedule, go to **Tools → Selectrum → Open Configuration** from the IDE menu. This will open the `selectrum.yaml` configuration file.
+To set up your daily schedule, go to **Tools → Selectrum → Open Configuration** from the main menu at the very top of the IDE window. This will open the `selectrum.yaml` configuration file.
 
 ### Configuration Format
 

@@ -17,8 +17,13 @@
     </extensions>
 
     <actions>
-        <group id="Selectrum.Menu" text="Selectrum" popup="true">
+        <group id="Selectrum.Menu" text="Selectrum" popup="true" icon="/icons/selectrum.svg">
             <add-to-group group-id="ToolsMenu" anchor="last"/>
+            <action id="Selectrum.Toggle"
+                    class="com.selectrum.infrastructure.action.ToggleSelectrumAction"
+                    text="Enable Theme Switching"
+                    description="Toggle automatic theme switching on or off"/>
+            <separator/>
             <action id="Selectrum.OpenConfig"
                     class="com.selectrum.infrastructure.action.OpenSelectrumConfigAction"
                     text="Open Configuration"
