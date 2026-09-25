@@ -1,10 +1,7 @@
 package com.selectrum.widget;
 
 import com.intellij.ide.DataManager;
-import com.intellij.openapi.actionSystem.AnAction;
-import com.intellij.openapi.actionSystem.AnActionEvent;
-import com.intellij.openapi.actionSystem.DefaultActionGroup;
-import com.intellij.openapi.actionSystem.ToggleAction;
+import com.intellij.openapi.actionSystem.*;
 import com.intellij.openapi.fileEditor.FileEditorManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.popup.JBPopupFactory;
@@ -58,60 +55,32 @@ public final class SelectrumStatusBarWidget implements StatusBarWidget, StatusBa
     }
 
     @Override
-    public @Nullable WidgetPresentation getPresentation() {
+    public WidgetPresentation getPresentation() {
         return this;
     }
 
-    // -------------------------------------------------------------------
-    // IconPresentation
-    // -------------------------------------------------------------------
-
     @Override
-    public @Nullable Icon getIcon() {
+    public Icon getIcon() {
         return ICON;
     }
 
     @Override
-    public @Nullable String getTooltipText() {
+    public String getTooltipText() {
         boolean enabled = SelectrumSettings.getInstance().isEnabled();
         return "Selectrum: " + (enabled ? "Enabled" : "Disabled");
     }
 
     @Override
-    public @Nullable com.intellij.util.Consumer<MouseEvent> getClickConsumer() {
+    public com.intellij.util.Consumer<MouseEvent> getClickConsumer() {
         return this::showPopup;
     }
-
-    // -------------------------------------------------------------------
-    // Popup menu
-    // -------------------------------------------------------------------
 
     private void showPopup(MouseEvent event) {
         DefaultActionGroup group = new DefaultActionGroup();
 
-        // Toggle: Enable / Disable theme switching
-        group.add(new ToggleAction("Theme Switching") {
-            @Override
-            public boolean isSelected(@NotNull AnActionEvent e) {
-                return SelectrumSettings.getInstance().isEnabled();
-            }
-
-            @Override
-            public void setSelected(@NotNull AnActionEvent e, boolean state) {
-                SelectrumSettings.getInstance().setEnabled(state);
-                if (statusBar != null) {
-                    statusBar.updateWidget(WIDGET_ID);
-                }
-                // If re-enabled, immediately re-evaluate the schedule
-                if (state) {
-                    SelectrumScheduler.getInstance().checkAndApplyTheme();
-                }
-            }
-        });
-
+        addGroupToggle(group);
         group.addSeparator();
 
-        // Action: Open configuration file
         group.add(new AnAction("Open Configuration") {
             @Override
             public void actionPerformed(@NotNull AnActionEvent e) {
@@ -128,10 +97,36 @@ public final class SelectrumStatusBarWidget implements StatusBarWidget, StatusBa
                 false
         );
 
-        // Show above the status bar (like IdeaVim does)
         Dimension size = popup.getContent().getPreferredSize();
         Point point = new Point(0, -size.height);
+
         popup.show(new RelativePoint(component, point));
+    }
+
+    private void addGroupToggle(DefaultActionGroup group) {
+        group.add(new ToggleAction("Theme Switching") {
+            @Override
+            public boolean isSelected(@NotNull AnActionEvent e) {
+                return SelectrumSettings.getInstance().isEnabled();
+            }
+
+            @Override
+            public void setSelected(@NotNull AnActionEvent e, boolean state) {
+                SelectrumSettings.getInstance().setEnabled(state);
+                if (statusBar != null) {
+                    statusBar.updateWidget(WIDGET_ID);
+                }
+
+                if (state) {
+                    SelectrumScheduler.getInstance().checkAndApplyTheme();
+                }
+            }
+
+            @Override
+            public @NotNull ActionUpdateThread getActionUpdateThread() {
+                return ActionUpdateThread.EDT;
+            }
+        });
     }
 
     private void openConfigFile() {
@@ -145,7 +140,5 @@ public final class SelectrumStatusBarWidget implements StatusBarWidget, StatusBa
     }
 
     @Override
-    public void dispose() {
-        // No resources to clean up
-    }
+    public void dispose() { }
 }

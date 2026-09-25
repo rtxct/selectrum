@@ -13,12 +13,8 @@
         <statusBarWidgetFactory id="SelectrumWidget"
                                 implementation="com.selectrum.widget.SelectrumStatusBarWidgetFactory"
                                 order="after Position"/>
+        <postStartupActivity implementation="com.selectrum.startup.SelectrumStartupListener"/>
     </extensions>
-
-    <applicationListeners>
-        <listener class="com.selectrum.startup.SelectrumStartupListener"
-                  topic="com.intellij.ide.AppLifecycleListener"/>
-    </applicationListeners>
 
     <actions>
         <group id="Selectrum.Menu" text="Selectrum" popup="true">

@@ -16,31 +16,32 @@ import org.jetbrains.annotations.NotNull;
 @State(name = "SelectrumSettings", storages = @Storage("selectrum-settings.xml"))
 public final class SelectrumSettings implements PersistentStateComponent<SelectrumSettings.State> {
 
+    public static SelectrumSettings getInstance() {
+        return ApplicationManager
+                .getApplication().getService(SelectrumSettings.class);
+    }
+
+    private final State crrState = new State();
+
     public static class State {
         public boolean enabled = true;
     }
 
-    private State myState = new State();
-
-    public static SelectrumSettings getInstance() {
-        return ApplicationManager.getApplication().getService(SelectrumSettings.class);
-    }
-
-    public boolean isEnabled() {
-        return myState.enabled;
-    }
-
-    public void setEnabled(boolean enabled) {
-        myState.enabled = enabled;
-    }
-
     @Override
     public @NotNull State getState() {
-        return myState;
+        return crrState;
     }
 
     @Override
     public void loadState(@NotNull State state) {
-        XmlSerializerUtil.copyBean(state, myState);
+        XmlSerializerUtil.copyBean(state, crrState);
+    }
+
+    public boolean isEnabled() {
+        return crrState.enabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        crrState.enabled = enabled;
     }
 }

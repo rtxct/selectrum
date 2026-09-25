@@ -1,5 +1,6 @@
 package com.selectrum.action;
 
+import com.intellij.openapi.actionSystem.ActionUpdateThread;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.fileEditor.FileEditorManager;
@@ -12,10 +13,10 @@ import org.jetbrains.annotations.NotNull;
 import java.nio.file.Path;
 
 /**
- * Action that opens the {@code selectrum.json} configuration file in the IDE editor.
+ * Action that opens the {@code selectrum.yaml} configuration file in the IDE editor.
  * <p>
- * Accessible via <b>Tools → Selectrum → Open Configuration</b>.
- * If the config file doesn't exist yet, the config service creates a default one first.
+ * Accessible via <b>Tools → Selectrum → Open Configuration</b>. If the config file doesn't
+ * exist yet, the config service creates a default one first.
  */
 public final class OpenSelectrumConfigAction extends AnAction {
 
@@ -29,8 +30,8 @@ public final class OpenSelectrumConfigAction extends AnAction {
         SelectrumConfigService configService = SelectrumConfigService.getInstance();
         Path configPath = configService.getConfigFilePath();
 
-        VirtualFile virtualFile = LocalFileSystem.getInstance()
-                .refreshAndFindFileByPath(configPath.toString());
+        VirtualFile virtualFile = LocalFileSystem
+                .getInstance().refreshAndFindFileByPath(configPath.toString());
 
         if (virtualFile != null) {
             FileEditorManager.getInstance(project).openFile(virtualFile, true);
@@ -39,7 +40,11 @@ public final class OpenSelectrumConfigAction extends AnAction {
 
     @Override
     public void update(@NotNull AnActionEvent e) {
-        // Only enable when a project is open
         e.getPresentation().setEnabledAndVisible(e.getProject() != null);
+    }
+
+    @Override
+    public @NotNull ActionUpdateThread getActionUpdateThread() {
+        return ActionUpdateThread.EDT;
     }
 }
