@@ -1,5 +1,6 @@
 package com.selectrum.application.service;
 
+import com.intellij.ide.ui.LafManager;
 import com.intellij.openapi.Disposable;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.application.PathManager;
@@ -14,6 +15,7 @@ import com.intellij.openapi.vfs.VirtualFileManager;
 import com.intellij.openapi.vfs.newvfs.BulkFileListener;
 import com.intellij.openapi.vfs.newvfs.events.VFileEvent;
 import com.intellij.util.concurrency.AppExecutorUtil;
+import com.selectrum.application.component.ThemeFinder;
 import com.selectrum.domain.model.ScheduleEntry;
 import com.selectrum.utils.NotificationUtils;
 import lombok.Getter;
@@ -56,7 +58,8 @@ public final class SelectrumConfigService implements Disposable {
     }
 
     @Override
-    public void dispose() { }
+    public void dispose() {
+    }
 
     private void subscribeToFileChanges() {
         ApplicationManager.getApplication().getMessageBus().connect(this)
@@ -130,6 +133,7 @@ public final class SelectrumConfigService implements Disposable {
             List<ScheduleEntry> entries = parseSchedule(content);
 
             schedule = Collections.unmodifiableList(entries);
+            validateSchedule(schedule);
         } catch (IOException e) {
             LOG.error("Failed to read Selectrum config file", e);
 
@@ -171,6 +175,7 @@ public final class SelectrumConfigService implements Disposable {
                     try {
                         List<ScheduleEntry> entries = parseSchedule(content);
                         schedule = Collections.unmodifiableList(entries);
+                        validateSchedule(schedule);
 
                         triggerSchedulerRecheck();
                     } catch (Exception e) {
@@ -254,5 +259,24 @@ public final class SelectrumConfigService implements Disposable {
     private String getOptionalString(Map<?, ?> map, String field) {
         Object value = map.get(field);
         return value != null ? value.toString() : null;
+    }
+
+    private void validateSchedule(List<ScheduleEntry> entries) {
+        LafManager lafManager = LafManager.getInstance();
+        ThemeFinder finder = ThemeFinder.instance();
+
+        for (ScheduleEntry entry : entries) {
+            String themeName = entry.getTheme();
+            if (finder.findThemeByName(lafManager, themeName) == null) {
+                com.selectrum.utils.NotificationUtils.notifyWarning("Theme '" + themeName
+                        + "' (at " + entry.getHour() + ") not found. Check your selectrum.yaml configuration.");
+            }
+
+            String editorName = entry.getEffectiveEditor();
+            if (entry.getEditor() != null && finder.findEditorSchemeByName(editorName) == null) {
+                com.selectrum.utils.NotificationUtils.notifyWarning("Editor scheme '"
+                        + editorName + "' (at " + entry.getHour() + ") not found. Check your selectrum.yaml configuration.");
+            }
+        }
     }
 }

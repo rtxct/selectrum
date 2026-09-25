@@ -12,7 +12,6 @@ import com.intellij.util.concurrency.AppExecutorUtil;
 import com.selectrum.application.component.ThemeFinder;
 import com.selectrum.domain.model.ScheduleEntry;
 import com.selectrum.infrastructure.settings.SelectrumSettings;
-import com.selectrum.utils.NotificationUtils;
 
 import java.time.Duration;
 import java.time.LocalDate;
@@ -162,8 +161,7 @@ public final class SelectrumScheduler implements Disposable {
             return;
         }
 
-        NotificationUtils.notifyWarning("Theme '" + themeName
-                + "' not found. Check your selectrum.yaml configuration.");
+        LOG.warn("Selectrum: theme '" + themeName + "' not found.");
     }
 
     private void applyEditorColorScheme(ScheduleEntry entry) {
@@ -181,9 +179,7 @@ public final class SelectrumScheduler implements Disposable {
         }
 
         if (entry.getEditor() != null) {
-            NotificationUtils.notifyWarning("Editor scheme '"
-                    + effectiveEditor + "' not found. Check your selectrum.yaml configuration.");
-            return;
+            LOG.warn("Selectrum: editor scheme '" + effectiveEditor + "' not found.");
         }
 
         lastAppliedEditor = effectiveEditor;
