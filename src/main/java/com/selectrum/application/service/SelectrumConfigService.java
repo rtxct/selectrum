@@ -143,11 +143,11 @@ public final class SelectrumConfigService implements Disposable {
                     # Available editors: Settings → Editor → Color Scheme
                     
                     schedule:
-                      "08:00":
+                      08:00:
                         theme: IntelliJ Light
-                      "18:00":
-                        theme: Darcula
-                        editor: Light
+                      18:00:
+                        theme: Light
+                        editor: Darcula
                     """;
 
             Files.writeString(configFilePath, defaultContent);

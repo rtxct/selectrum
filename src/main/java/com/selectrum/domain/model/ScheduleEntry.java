@@ -4,6 +4,7 @@ import com.selectrum.utils.TimeUtils;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.time.LocalTime;
 import java.util.Objects;
@@ -49,7 +50,7 @@ public final class ScheduleEntry {
      * @param editor the name of the editor color scheme, or {@code null}
      * @throws NullPointerException if {@code hour} or {@code theme} is null
      */
-    public ScheduleEntry(@NotNull String hour, @NotNull String theme, @NotNull String editor) {
+    public ScheduleEntry(@NotNull String hour, @NotNull String theme, @Nullable String editor) {
         this.hour = Objects.requireNonNull(hour, "hour must not be null");
         this.theme = Objects.requireNonNull(theme, "theme must not be null");
 
