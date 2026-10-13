@@ -1,6 +1,6 @@
 # Selectrum
 
-**Selectrum** is a JetBrains plugin that automatically switches the IDE's UI theme and editor color scheme based on the time of day. It reads a local YAML configuration file to schedule theme transitions and updates the IDE appearance in the background.
+**Selectrum** _(select spectrum)_ is a JetBrains plugin that automatically switches the IDE's UI theme and editor color scheme based on the time of day. It reads a local YAML configuration file to schedule theme transitions and updates the IDE appearance in the background.
 
 ## Installation
 
