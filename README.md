@@ -40,3 +40,15 @@ schedule:
 Once your schedule is configured and saved, Selectrum takes care of the rest automatically. 
 
 If you temporarily need to disable automatic switching, click the **Selectrum** widget in the bottom-right status bar of your IDE and uncheck **Theme Switching**. Click it again to resume your schedule.
+
+<br>
+
+<div align="center">
+  <a href="https://buymeacoffee.com/rtxct">
+    <img
+      src="https://raw.githubusercontent.com/pachadotdev/buymeacoffee-badges/main/bmc-black.svg"
+      alt="Buy Me a Coffee"
+      width="200"
+    />
+  </a>
+</div>
